@@ -1,34 +1,46 @@
 body {
-    font - family : 'Roboto',
-    sans - serif;
+    font-family: 'Roboto', sans-serif;
 }
 
 h2 {}
-h4 {}.current - temperature {
-    font - size : 25 px;
-    font - weight : 600;
-}.max - temp {
-    font - size : 20 px;
-    font - weight : 600;
-}.min - temp {
-    font - size : 20 px;
-    font - weight : 600;
-}.scale - preference {
-    position : relative;
-    width : 85 %;
-    padding : 0;
-    margin - top : 10 px;
-    top : -180 px;
-    left : 0;
-    text - align : right;
-    font - size : 25 px;
-    font - weight : 600;
-}.feels - like,.current - weather {}.current - weather - emoji {
-    position : relative;
-    width : 60 %;
-    padding : 0;
-    top : -130 px;
-    left : 0;
-    text - align : right;
-    font - size : 100 px;
+
+h4 {}
+
+.currenttemperature {
+    font-size: 25 px;
+    font-weight: 600;
+}
+
+.maxtemp {
+    font-size: 20 px;
+    font-weight: 600;
+}
+
+.mintemp {
+    font-size: 20 px;
+    font-weight: 600;
+}
+
+.scalepreference {
+    position: relative;
+    width: 85%;
+    padding: 0;
+    margin-top: 10 px;
+    top: -180 px;
+    left: 0;
+    text-align: right;
+    font-size: 25 px;
+    font-weight: 600;
+}
+
+.feelslike, .currentweather {}
+
+.currentweatheremoji {
+    position: relative;
+    width: 60%;
+    padding: 0;
+    top: -130 px;
+    left: 0;
+    text-align: right;
+    font-size: 100 px;
 }
