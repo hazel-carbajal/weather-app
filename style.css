@@ -2,10 +2,6 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
-h2 {}
-
-h4 {}
-
 .currenttemperature {
     font-size: 25 px;
     font-weight: 600;
@@ -32,8 +28,6 @@ h4 {}
     font-size: 25 px;
     font-weight: 600;
 }
-
-.feelslike, .currentweather {}
 
 .currentweatheremoji {
     position: relative;
