@@ -2,9 +2,12 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
-.container {
+.weather-app-wrapper {
     max-width: 600px;
     margin: 30px auto;
+}
+
+.weather-app {
     padding: 20px;
     border: 1px solid black;
     border-radius: 5px;
