@@ -2,6 +2,14 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
+.container {
+    max-width: 600px;
+    margin: 30px auto;
+    padding: 20px;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+    
 .currenttemperature {
     font-size: 25 px;
     font-weight: 600;
