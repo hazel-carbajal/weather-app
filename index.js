@@ -26,7 +26,7 @@ let month = currentDateTime.getMonth() + 1;
 let date = currentDateTime.getDate();
 
 function showDayAndTime() {
-  let currentDayandTime = document.querySelector("h4.date-time");
+  let currentDayAndTime = document.querySelector("h4.date-time");
 }
 
 function displayWeatherForSearchedCity(response) {
@@ -92,8 +92,8 @@ function convertTempToCelsius(event) {
   temperatureElement.innerHTML = Math.round(celsiusTemperature);
 }
 
-let currentDayandTime = document.querySelector("h4.date-time");
-currentDayandTime.innerHTML = `${day} ${month}/${date} ${hour}:${minute}`;
+let currentDayAndTime = document.querySelector("h4.date-time");
+currentDayAndTime.innerHTML = `${day} ${month}/${date} ${hour}:${minute}`;
 
 let citySearchForm = document.querySelector("#city-search-form");
 citySearchForm.addEventListener("submit", displaySearchedCity);
