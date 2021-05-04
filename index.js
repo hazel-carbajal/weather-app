@@ -47,6 +47,8 @@ function displayWeatherForSearchedCity(response) {
     response.data.weather[0].main;
   document.querySelector("#sunrise").innerHTML = response.data.sys.sunrise;
   document.querySelector("#sunset").innerHTML = response.data.sys.sunset;
+
+  celsiusTemperature = response.data.main.temp;
 }
 
 function searchCity(city) {
@@ -56,7 +58,6 @@ function searchCity(city) {
 }
 
 function displaySearchedCity(event) {
-  debugger;
   event.preventDefault();
   let city = document.querySelector("#city-input").value;
   searchCity(city);
@@ -75,14 +76,20 @@ function getCurrentLocation(event) {
 
 function convertTempToFahrenheit(event) {
   event.preventDefault();
-  let temperatureElement = document.querySelector(".current-temperature");
-  temperatureElement.innerHTML = "66°F";
+  celsiusTemp.classList.remove("active");
+  fahrenheitTemp.classList.add("active");
+  let tempToFahrenheit = (celsiusTemperature * 9) / 5 + 32;
+  let temperatureElement = document.querySelector("#city-temp");
+  temperatureElement.innerHTML = Math.round(tempToFahrenheit);
+  let temperatureUnits = document.querySelector("#temp-units");
 }
 
 function convertTempToCelsius(event) {
   event.preventDefault();
-  let temperatureElement = document.querySelector(".current-temperature");
-  temperatureElement.innerHTML = "19°C";
+  celsiusTemp.classList.add("active");
+  fahrenheitTemp.classList.remove("active");
+  let temperatureElement = document.querySelector("#city-temp");
+  temperatureElement.innerHTML = Math.round(celsiusTemperature);
 }
 
 let currentDayandTime = document.querySelector("h4.date-time");
@@ -102,26 +109,4 @@ currentLocationButton.addEventListener("click", getCurrentLocation);
 
 searchCity("Ottawa");
 
-// TO DO:
-// Update all of the °C and °F to be shown in C or F based on the unit selected for the .current-temperature class
-// <div class="scale-preference">
-//      <span class="units">
-//       <a href="#" id="celsius-temp">°C</a> |
-//       <a href="#" id="fahrenheit-temp">°F</a>
-//      </span>
-//    </div>
-//   <div class="current-temperature">
-//      1°C
-//    </div>
-//    <div class="feels-like">
-//      Feels Like 0°C
-//    </div>
-//    <div class="current-weather">
-//       Clear
-//    </div>
-//    <div class="max-temp">
-//      H: 20°C
-//    </div>
-//    <div class="min-temp">
-//      L: 1°C
-//    </div>
+let celsiusTemperature = null;
