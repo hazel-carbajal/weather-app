@@ -95,9 +95,6 @@ function convertTempToCelsius(event) {
   temperatureElement.innerHTML = Math.round(celsiusTemperature);
 }
 
-let currentDayAndTime = document.querySelector("h4.date-time");
-currentDayAndTime.innerHTML = `${day} ${month}/${date} ${hour}:${minute}`;
-
 let citySearchForm = document.querySelector("#city-search-form");
 citySearchForm.addEventListener("submit", displaySearchedCity);
 
