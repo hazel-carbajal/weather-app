@@ -1,35 +1,38 @@
-let currentDateTime = new Date();
+function formatDateTime(timestamp) {
+  console.log(timestamp);
+  let date = new Date(timestamp);
+  let hour = date.getHours();
+  if (hour < 10) {
+    hour = `0${hour}`;
+  }
+  let minutes = date.getMinutes();
+  if (minutes < 10) {
+    minutes = `0${minutes}`;
+  }
 
-let hour = currentDateTime.getHours();
-if (hour < 10) {
-  hour = `0${hour}`;
-}
+  let month = date.getMonth() + 1;
 
-let minute = currentDateTime.getMinutes();
-if (minute < 10) {
-  minute = `0${minute}`;
-}
+  let day = date.getDate();
 
-let days = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday"
-];
-let day = days[currentDateTime.getDay()];
+  let weekdays = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday"
+  ];
+  let dayOfWeek = weekdays[date.getDay()];
 
-let month = currentDateTime.getMonth() + 1;
-
-let date = currentDateTime.getDate();
-
-function showDayAndTime() {
-  let currentDayAndTime = document.querySelector("h4.date-time");
+  return `${dayOfWeek} ${month}/${day} ${hour}:${minutes}`;
 }
 
 function displayWeatherForSearchedCity(response) {
+  console.log(response.data);
+  let dateElement = document.querySelector("h4.date-time");
+  dateElement.innerHTML = formatDateTime(response.data.dt * 1000);
+
   document.querySelector("#searched-city").innerHTML = response.data.name;
   document.querySelector("#city-temp").innerHTML = Math.round(
     response.data.main.temp
