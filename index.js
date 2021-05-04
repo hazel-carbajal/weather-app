@@ -30,8 +30,7 @@ function formatDateTime(timestamp) {
 
 function displayWeatherForSearchedCity(response) {
   console.log(response.data);
-  let dateElement = document.querySelector("h4.date-time");
-  
+  let dateElement = document.querySelector("#date-and-time");
   let iconElement = document.querySelector("#emoji");
 
   document.querySelector("#searched-city").innerHTML = response.data.name;
