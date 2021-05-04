@@ -15,7 +15,7 @@ body {
     color: #86c232;
 }
     
-.currenttemperature {
+.searched-city-current-temperature {
     font-size: 25 px;
     font-weight: 600;
 }
@@ -30,7 +30,7 @@ body {
     font-weight: 600;
 }
 
-.scalepreference {
+.scale-preference {
     position: relative;
     width: 85%;
     padding: 0;
@@ -50,4 +50,10 @@ body {
     left: 0;
     text-align: right;
     font-size: 100 px;
+}
+
+.scale-preference .active {
+    color: #86c232;
+    cursor: default;
+    text-decoration: none;
 }
