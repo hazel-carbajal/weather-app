@@ -31,7 +31,8 @@ function formatDateTime(timestamp) {
 function displayWeatherForSearchedCity(response) {
   console.log(response.data);
   let dateElement = document.querySelector("h4.date-time");
-  dateElement.innerHTML = formatDateTime(response.data.dt * 1000);
+  
+  let iconElement = document.querySelector("#emoji");
 
   document.querySelector("#searched-city").innerHTML = response.data.name;
   document.querySelector("#city-temp").innerHTML = Math.round(
@@ -52,6 +53,11 @@ function displayWeatherForSearchedCity(response) {
   document.querySelector("#sunset").innerHTML = response.data.sys.sunset;
 
   celsiusTemperature = response.data.main.temp;
+  dateElement.innerHTML = formatDateTime(response.data.dt * 1000);
+  iconElement.setAttribute(
+    "src",
+    `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+  );
 }
 
 function searchCity(city) {
