@@ -28,6 +28,34 @@ function formatDateTime(timestamp) {
   return `${dayOfWeek} ${month}/${day} ${hour}:${minutes}`;
 }
 
+function displayForecast() {
+  let forecastElement = document.querySelector("#forecast");
+
+  let forecastHTML = `<div class="row">`;
+  let days = ["Wed", "Thu", "Fri", "Sat", "Sun", "Mon"];
+  days.forEach(function(day) {
+    forecastHTML =
+      forecastHTML +
+      ` 
+      <div class="col-2">
+        <div class="forecast-weekdays">${day}</div>
+          <img
+            src="http://openweathermap.org/img/wn/50d@2x.png"
+            alt=""
+            width="42"
+          />
+          <div class="forecast-temperatures">
+            <span class="forecast-temperature-max"> 14° </span>
+            <span class="forecast-temperature-min"> 10° </span>
+          </div>
+       </div>
+  `;
+  });
+
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
+}
+
 function displayWeatherForSearchedCity(response) {
   console.log(response.data);
   let dateElement = document.querySelector("#date-and-time");
@@ -113,5 +141,6 @@ let currentLocationButton = document.querySelector("#current-location-button");
 currentLocationButton.addEventListener("click", getCurrentLocation);
 
 searchCity("Ottawa");
+displayForecast();
 
 let celsiusTemperature = null;
