@@ -28,6 +28,14 @@ function formatDateTime(timestamp) {
   return `${dayOfWeek} ${month}/${day} ${hour}:${minutes}`;
 }
 
+function formatApiShortTermForecastDate(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+  let weekdays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+  return weekdays[day];
+}
+
 function displayShortTermForecast(response) {
   let forecast = response.data.daily;
   let forecastElement = document.querySelector("#forecast");
@@ -39,7 +47,9 @@ function displayShortTermForecast(response) {
       forecastHTML +
       ` 
       <div class="col-2">
-        <div class="forecast-weekdays">${forecastDay.dt}</div>
+        <div class="forecast-weekdays">${formatApiShortTermForecastDate(
+          forecastDay.dt
+        )}</div>
           <img
             src="https://openweathermap.org/img/wn/${forecastDay.weather[0].icon}@2x.png"
             alt=""
