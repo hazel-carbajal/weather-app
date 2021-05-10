@@ -56,8 +56,8 @@ function displayShortTermForecast(response) {
             width="42"
           />
           <div class="forecast-temperatures">
-            <span class="forecast-temperature-max">${forecastDay.temp.max}°</span>
-            <span class="forecast-temperature-min">${forecastDay.temp.min}°</span>
+            <span class="forecast-temperature-max">${Math.round(forecastDay.temp.max)}°</span>
+            <span class="forecast-temperature-min">${Math.round(forecastDay.temp.min)}°</span>
           </div>
        </div>
   `;
