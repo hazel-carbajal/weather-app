@@ -38,33 +38,41 @@ function formatApiShortTermForecastDate(timestamp) {
 
 function displayShortTermForecast(response) {
   let forecast = response.data.daily;
-  let forecastElement = document.querySelector("#forecast");
+  let forecastElement = document.querySelector("#forecast"); // new element referenced above
 
-  let forecastHTML = `<div class="row">`;
- 
-  forecast.forEach(function(forecastDay) {
-    forecastHTML =
-      forecastHTML +
-      ` 
-      <div class="col-2">
+  let forecastHTML = `<div class="row">`; 
+
+  forecast.forEach(function(forecastDay, index) {
+    if (index < 6) {
+      forecastHTML =
+        forecastHTML + 
+        ` 
+      <div class="col-2"> 
         <div class="forecast-weekdays">${formatApiShortTermForecastDate(
           forecastDay.dt
         )}</div>
           <img
-            src="https://openweathermap.org/img/wn/${forecastDay.weather[0].icon}@2x.png"
+            src="https://openweathermap.org/img/wn/${
+              forecastDay.weather[0].icon
+            }@2x.png"
             alt=""
             width="42"
           />
           <div class="forecast-temperatures">
-            <span class="forecast-temperature-max">${Math.round(forecastDay.temp.max)}°</span>
-            <span class="forecast-temperature-min">${Math.round(forecastDay.temp.min)}°</span>
+            <span class="forecast-temperature-max">${Math.round(
+              forecastDay.temp.max
+            )}°</span>
+            <span class="forecast-temperature-min">${Math.round(
+              forecastDay.temp.min
+            )}°</span>
           </div>
        </div>
   `;
+    }
   });
 
-  forecastHTML = forecastHTML + `</div>`;
-  forecastElement.innerHTML = forecastHTML;
+  forecastHTML = forecastHTML + `</div>`; 
+  forecastElement.innerHTML = forecastHTML; 
 }
 
 function getForecast(coordinates) {
