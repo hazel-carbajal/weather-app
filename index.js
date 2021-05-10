@@ -28,6 +28,20 @@ function formatDateTime(timestamp) {
   return `${dayOfWeek} ${month}/${day} ${hour}:${minutes}`;
 }
 
+function formatTime(timestamp) {
+  let date = new Date(timestamp);
+  let hour = date.getHours();
+  if (hour < 10) {
+    hour = `0${hour}`;
+  }
+  let minutes = date.getMinutes();
+  if (minutes < 10) {
+    minutes = `0${minutes}`;
+  }
+
+  return `${hour}:${minutes}`;
+}
+
 function formatApiShortTermForecastDate(timestamp) {
   let date = new Date(timestamp * 1000);
   let day = date.getDay();
@@ -101,8 +115,12 @@ function displayWeatherForSearchedCity(response) {
   );
   document.querySelector("#current-weather-conditions").innerHTML =
     response.data.weather[0].main;
-  document.querySelector("#sunrise").innerHTML = response.data.sys.sunrise;
-  document.querySelector("#sunset").innerHTML = response.data.sys.sunset;
+  document.querySelector("#sunrise").innerHTML = formatTime(
+    response.data.sys.sunrise * 1000
+  );
+  document.querySelector("#sunset").innerHTML = formatTime(
+    response.data.sys.sunset * 1000
+  );
 
   celsiusTemperature = response.data.main.temp;
   dateElement.innerHTML = formatDateTime(response.data.dt * 1000);
