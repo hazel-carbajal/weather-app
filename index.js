@@ -1,5 +1,4 @@
 function formatDateTime(timestamp) {
-  console.log(timestamp);
   let date = new Date(timestamp);
   let hour = date.getHours();
   if (hour < 10) {
@@ -52,14 +51,14 @@ function formatApiShortTermForecastDate(timestamp) {
 
 function displayShortTermForecast(response) {
   let forecast = response.data.daily;
-  let forecastElement = document.querySelector("#forecast");
+  let forecastElement = document.querySelector("#forecast"); // new element referenced above
 
-  let forecastHTML = `<div class="row">`; 
+  let forecastHTML = `<div class="row">`; // we're creating here a new string element that just has a row
 
   forecast.forEach(function(forecastDay, index) {
     if (index < 6) {
       forecastHTML =
-        forecastHTML + 
+        forecastHTML + // removed the below HTML from the HTML file to handle from here in JS
         ` 
       <div class="col-2"> 
         <div class="forecast-weekdays">${formatApiShortTermForecastDate(
@@ -85,18 +84,17 @@ function displayShortTermForecast(response) {
     }
   });
 
-  forecastHTML = forecastHTML + `</div>`; 
-  forecastElement.innerHTML = forecastHTML; 
+  forecastHTML = forecastHTML + `</div>`; // here we're closing the </div> MUST DO!!!
+  forecastElement.innerHTML = forecastHTML; // this is putting the result of the above function in the forecast element that was selected before ("#forecast")
 }
 
 function getForecast(coordinates) {
   let apiKey = "906eb52d0f658b640312a572c13864cf";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&&appid=${apiKey}&units=metric`;
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
   axios.get(apiUrl).then(displayShortTermForecast);
 }
 
 function displayWeatherForSearchedCity(response) {
-  console.log(response.data);
   let dateElement = document.querySelector("#date-and-time");
   let iconElement = document.querySelector("#emoji");
 
@@ -115,12 +113,6 @@ function displayWeatherForSearchedCity(response) {
   );
   document.querySelector("#current-weather-conditions").innerHTML =
     response.data.weather[0].main;
-  document.querySelector("#sunrise").innerHTML = formatTime(
-    response.data.sys.sunrise * 1000
-  );
-  document.querySelector("#sunset").innerHTML = formatTime(
-    response.data.sys.sunset * 1000
-  );
 
   celsiusTemperature = response.data.main.temp;
   dateElement.innerHTML = formatDateTime(response.data.dt * 1000);
@@ -128,7 +120,7 @@ function displayWeatherForSearchedCity(response) {
     "src",
     `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   );
-  
+
   getForecast(response.data.coord);
 }
 
@@ -155,36 +147,10 @@ function getCurrentLocation(event) {
   navigator.geolocation.getCurrentPosition(searchCurrentLocation);
 }
 
-function convertTempToFahrenheit(event) {
-  event.preventDefault();
-  celsiusTemp.classList.remove("active");
-  fahrenheitTemp.classList.add("active");
-  let tempToFahrenheit = (celsiusTemperature * 9) / 5 + 32;
-  let temperatureElement = document.querySelector("#city-temp");
-  temperatureElement.innerHTML = Math.round(tempToFahrenheit);
-  let temperatureUnits = document.querySelector("#temp-units");
-}
-
-function convertTempToCelsius(event) {
-  event.preventDefault();
-  celsiusTemp.classList.add("active");
-  fahrenheitTemp.classList.remove("active");
-  let temperatureElement = document.querySelector("#city-temp");
-  temperatureElement.innerHTML = Math.round(celsiusTemperature);
-}
-
 let citySearchForm = document.querySelector("#city-search-form");
 citySearchForm.addEventListener("submit", displaySearchedCity);
-
-let fahrenheitTemp = document.querySelector("#fahrenheit-temp");
-fahrenheitTemp.addEventListener("click", convertTempToFahrenheit);
-
-let celsiusTemp = document.querySelector("#celsius-temp");
-celsiusTemp.addEventListener("click", convertTempToCelsius);
 
 let currentLocationButton = document.querySelector("#current-location-button");
 currentLocationButton.addEventListener("click", getCurrentLocation);
 
 searchCity("Ottawa");
-
-let celsiusTemperature = null;
