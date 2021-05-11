@@ -113,12 +113,6 @@ function displayWeatherForSearchedCity(response) {
   );
   document.querySelector("#current-weather-conditions").innerHTML =
     response.data.weather[0].main;
-  document.querySelector("#sunrise").innerHTML = formatTime(
-    response.data.sys.sunrise * 1000
-  );
-  document.querySelector("#sunset").innerHTML = formatTime(
-    response.data.sys.sunset * 1000
-  );
 
   celsiusTemperature = response.data.main.temp;
   dateElement.innerHTML = formatDateTime(response.data.dt * 1000);
@@ -153,35 +147,10 @@ function getCurrentLocation(event) {
   navigator.geolocation.getCurrentPosition(searchCurrentLocation);
 }
 
-function convertTempToFahrenheit(event) {
-  event.preventDefault();
-  celsiusTemp.classList.remove("active");
-  fahrenheitTemp.classList.add("active");
-  let tempToFahrenheit = (celsiusTemperature * 9) / 5 + 32;
-  let temperatureElement = document.querySelector("#city-temp");
-  temperatureElement.innerHTML = Math.round(tempToFahrenheit);
-}
-
-function convertTempToCelsius(event) {
-  event.preventDefault();
-  celsiusTemp.classList.add("active");
-  fahrenheitTemp.classList.remove("active");
-  let temperatureElement = document.querySelector("#city-temp");
-  temperatureElement.innerHTML = Math.round(celsiusTemperature);
-}
-
 let citySearchForm = document.querySelector("#city-search-form");
 citySearchForm.addEventListener("submit", displaySearchedCity);
-
-let fahrenheitTemp = document.querySelector("#fahrenheit-temp");
-fahrenheitTemp.addEventListener("click", convertTempToFahrenheit);
-
-let celsiusTemp = document.querySelector("#celsius-temp");
-celsiusTemp.addEventListener("click", convertTempToCelsius);
 
 let currentLocationButton = document.querySelector("#current-location-button");
 currentLocationButton.addEventListener("click", getCurrentLocation);
 
 searchCity("Ottawa");
-
-let celsiusTemperature = null;
